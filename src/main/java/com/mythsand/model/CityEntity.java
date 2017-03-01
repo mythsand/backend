@@ -15,6 +15,8 @@ public class CityEntity {
     private String point;
     private String pinyin;
     private int id;
+    private String airPoint;
+    private String waterPoint;
 
     @Basic
     @Column(name = "province", nullable = true, length = 255)
@@ -112,5 +114,25 @@ public class CityEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Id
+    @Column(name = "air_point", nullable = false, length = 255)
+    public String getAirPoint() {
+        return airPoint;
+    }
+
+    public void setAirPoint(String airPoint) {
+        this.airPoint = airPoint;
+    }
+
+    @Id
+    @Column(name = "water_point", nullable = false, length = 255)
+    public String getWaterPoint() {
+        return waterPoint;
+    }
+
+    public void setWaterPoint(String waterPoint) {
+        this.waterPoint = waterPoint;
     }
 }

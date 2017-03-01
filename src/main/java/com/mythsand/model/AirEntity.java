@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 @Table(name = "air", schema = "winter", catalog = "")
 public class AirEntity {
     private String id;
-    private String location;
     private Timestamp time;
     private Double aqi;
     private String rank;
@@ -21,26 +20,17 @@ public class AirEntity {
     private Double o3;
     private Double so2;
     private String mainPollutant;
+    private String airPoint;
 
-    @Basic
+
     @Id
-    @Column(name = "id", nullable = true, length = 255)
+    @Column(name = "id", nullable = false, length = 255)
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    @Basic
-    @Column(name = "location", nullable = true, length = 255)
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     @Basic
@@ -151,7 +141,6 @@ public class AirEntity {
         AirEntity airEntity = (AirEntity) o;
 
         if (id != null ? !id.equals(airEntity.id) : airEntity.id != null) return false;
-        if (location != null ? !location.equals(airEntity.location) : airEntity.location != null) return false;
         if (time != null ? !time.equals(airEntity.time) : airEntity.time != null) return false;
         if (aqi != null ? !aqi.equals(airEntity.aqi) : airEntity.aqi != null) return false;
         if (rank != null ? !rank.equals(airEntity.rank) : airEntity.rank != null) return false;
@@ -170,7 +159,6 @@ public class AirEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (location != null ? location.hashCode() : 0);
         result = 31 * result + (time != null ? time.hashCode() : 0);
         result = 31 * result + (aqi != null ? aqi.hashCode() : 0);
         result = 31 * result + (rank != null ? rank.hashCode() : 0);
@@ -182,5 +170,15 @@ public class AirEntity {
         result = 31 * result + (so2 != null ? so2.hashCode() : 0);
         result = 31 * result + (mainPollutant != null ? mainPollutant.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "air_point", nullable = true, length = 255)
+    public String getAirPoint() {
+        return airPoint;
+    }
+
+    public void setAirPoint(String airPoint) {
+        this.airPoint = airPoint;
     }
 }

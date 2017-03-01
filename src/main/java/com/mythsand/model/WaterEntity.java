@@ -16,6 +16,7 @@ public class WaterEntity {
     private Double nh3N;
     private String toWeek;
     private String preWeek;
+    private String waterPoint;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -127,5 +128,15 @@ public class WaterEntity {
         result = 31 * result + (toWeek != null ? toWeek.hashCode() : 0);
         result = 31 * result + (preWeek != null ? preWeek.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "water_point", nullable = true, length = 255)
+    public String getWaterPoint() {
+        return waterPoint;
+    }
+
+    public void setWaterPoint(String waterPoint) {
+        this.waterPoint = waterPoint;
     }
 }

@@ -21,10 +21,11 @@ public class WeatherEntity {
     private String cloudRate;
     private Double windSpeed;
     private Double windDir;
+    private String city;
 
     @Basic
     @Id
-    @Column(name = "id", nullable = true, length = 255)
+    @Column(name = "id", nullable = false, length = 255)
     public String getId() {
         return id;
     }
@@ -182,5 +183,15 @@ public class WeatherEntity {
         result = 31 * result + (windSpeed != null ? windSpeed.hashCode() : 0);
         result = 31 * result + (windDir != null ? windDir.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "city", nullable = true, length = 255)
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

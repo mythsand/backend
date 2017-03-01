@@ -6,6 +6,7 @@ import com.mythsand.repository.AirRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +24,9 @@ public class AirController {
     @Autowired
     AirRepository airRepository;
 
-    @RequestMapping("/test")
-    public ResponseEntity<?> test(){
+    @RequestMapping("/location/{location}")
+    public ResponseEntity<?> getByLocation(@PathVariable("location") String location){
+        System.out.println("location:"+location);
         List<AirEntity> airEntityList;
         airEntityList = airRepository.findAll();
         Map map = new HashMap();
