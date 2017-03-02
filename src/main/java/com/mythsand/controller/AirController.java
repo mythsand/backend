@@ -11,9 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.channels.SocketChannel;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mythsand on 25/02/2017.
@@ -22,8 +23,7 @@ import java.util.*;
 @RequestMapping("/air")
 public class AirController {
 
-
-    @Autowired
+        @Autowired
     AirRepository airRepository;
 
     /**
@@ -35,7 +35,7 @@ public class AirController {
      * */
     @RequestMapping(value = "/airpoint/{air_point}",method = RequestMethod.GET)
     public ResponseEntity<?> getByLocation(@PathVariable("air_point") String airPoint, @RequestParam(value = "page",defaultValue = "0") Integer page, @RequestParam(value = "size",defaultValue = "20") Integer size){
-        System.out.println("AIR_POINT:"+airPoint);
+//        System.out.println("AIR_POINT:"+airPoint);
         Sort sort = new Sort(Sort.Direction.DESC,"time");
         Pageable pageable = new PageRequest(page,size,sort);
         Page<AirEntity> airEntityList;
@@ -43,8 +43,7 @@ public class AirController {
         Map map = new HashMap();
         map.put("result",airEntityList);
         map.put("status","success");
-        ResponseEntity responseEntity = new ResponseEntity<>(map, HttpStatus.OK);
-        return responseEntity;
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     /**
@@ -57,7 +56,7 @@ public class AirController {
      * */
     @RequestMapping("/time")
     public ResponseEntity<?> getByTime(@RequestParam(value = "from",defaultValue = "0")long from_timestamp,@RequestParam(value = "to",defaultValue = "0")long to_timestamp){
-        System.out.println("data get :"+from_timestamp+to_timestamp);
+//        System.out.println("data get :"+from_timestamp+to_timestamp);
         Timestamp fromTime = new Timestamp(from_timestamp);
         Timestamp toTime = new Timestamp(to_timestamp);
         List<AirEntity> airEntityList;
@@ -65,7 +64,6 @@ public class AirController {
         Map map = new HashMap();
         map.put("result",airEntityList);
         map.put("status","success");
-        ResponseEntity responseEntity =  new ResponseEntity<>(map,HttpStatus.OK);
-        return responseEntity;
+        return new ResponseEntity<>(map,HttpStatus.OK);
     }
 }

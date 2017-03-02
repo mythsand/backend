@@ -2,6 +2,7 @@ package com.mythsand.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by mythsand on 02/03/2017.
@@ -10,7 +11,7 @@ import java.sql.Date;
 @Table(name = "weather", schema = "winter", catalog = "")
 public class WeatherEntity {
     private int id;
-    private Date time;
+    private Timestamp time;
     private String weather;
     private Double temperature;
     private String humidity;
@@ -34,11 +35,11 @@ public class WeatherEntity {
 
     @Basic
     @Column(name = "time", nullable = true)
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 

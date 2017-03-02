@@ -1,5 +1,7 @@
 package com.mythsand.controller;
 
+import com.mythsand.repository.WaterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,4 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/water")
 public class WaterController {
+
+    @Autowired
+    WaterRepository waterRepository;
+
 }
