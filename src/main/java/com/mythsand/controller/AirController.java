@@ -9,12 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.channels.SocketChannel;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * Created by mythsand on 25/02/2017.
@@ -23,11 +22,19 @@ import java.util.Map;
 @RequestMapping("/air")
 public class AirController {
 
+
     @Autowired
     AirRepository airRepository;
 
-    @RequestMapping("/airpoint/{airpoint}/{page}/{size}")
-    public ResponseEntity<?> getByLocation(@PathVariable("airpoint") String airPoint, @PathVariable(value = "page") Integer page,@PathVariable("size") Integer size){
+    /**
+     * url 格式 "air/airpoint/{air_point}" get 方法
+     * 根据检测地点查询数据
+     * @param page 页数
+     * @param size 页面大小
+     *
+     * */
+    @RequestMapping(value = "/airpoint/{air_point}",method = RequestMethod.GET)
+    public ResponseEntity<?> getByLocation(@PathVariable("air_point") String airPoint, @RequestParam(value = "page",defaultValue = "0") Integer page, @RequestParam(value = "size",defaultValue = "20") Integer size){
         System.out.println("AIR_POINT:"+airPoint);
         Sort sort = new Sort(Sort.Direction.DESC,"time");
         Pageable pageable = new PageRequest(page,size,sort);
@@ -37,6 +44,28 @@ public class AirController {
         map.put("result",airEntityList);
         map.put("status","success");
         ResponseEntity responseEntity = new ResponseEntity<>(map, HttpStatus.OK);
+        return responseEntity;
+    }
+
+    /**
+     *
+     *  url 格式 "air/time"
+     * 根据时间查询，unix时间戳，long 类型
+     * @param from_timestamp 起始日期
+     * @param to_timestamp 终点日期
+     *
+     * */
+    @RequestMapping("/time")
+    public ResponseEntity<?> getByTime(@RequestParam(value = "from",defaultValue = "0")long from_timestamp,@RequestParam(value = "to",defaultValue = "0")long to_timestamp){
+        System.out.println("data get :"+from_timestamp+to_timestamp);
+        Timestamp fromTime = new Timestamp(from_timestamp);
+        Timestamp toTime = new Timestamp(to_timestamp);
+        List<AirEntity> airEntityList;
+        airEntityList = airRepository.findByTime(fromTime,toTime);
+        Map map = new HashMap();
+        map.put("result",airEntityList);
+        map.put("status","success");
+        ResponseEntity responseEntity =  new ResponseEntity<>(map,HttpStatus.OK);
         return responseEntity;
     }
 }
