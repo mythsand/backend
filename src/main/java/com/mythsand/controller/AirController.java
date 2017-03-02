@@ -27,13 +27,13 @@ public class AirController {
     AirRepository airRepository;
 
     /**
-     * url 格式 "air/airpoint/{air_point}" get 方法
+     * url 格式 "air/point/{air_point}" 方法: GET
      * 根据检测地点查询数据
      * @param page 页数
      * @param size 页面大小
      *
      * */
-    @RequestMapping(value = "/airpoint/{air_point}",method = RequestMethod.GET)
+    @RequestMapping(value = "/point/{air_point}",method = RequestMethod.GET)
     public ResponseEntity<?> getByLocation(@PathVariable("air_point") String airPoint, @RequestParam(value = "page",defaultValue = "0") Integer page, @RequestParam(value = "size",defaultValue = "20") Integer size){
 //        System.out.println("AIR_POINT:"+airPoint);
         Sort sort = new Sort(Sort.Direction.DESC,"time");
@@ -48,7 +48,7 @@ public class AirController {
 
     /**
      *
-     *  url 格式 "air/time"
+     *  url 格式 "air/time"  方法：GET
      * 根据时间查询，unix时间戳，long 类型
      * @param from_timestamp 起始日期
      * @param to_timestamp 终点日期

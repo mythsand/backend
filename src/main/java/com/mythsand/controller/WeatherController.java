@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,7 +25,13 @@ public class WeatherController {
 
     @Autowired
     WeatherRepository weatherRepository;
-
+    /**
+     *   url  匹配 "/weather/city/{city}"  方法：GET
+     *   @param page
+     *   @param size
+     *
+     *   @return
+     * */
     @RequestMapping(value = "/city/{city}",method = RequestMethod.GET)
     public ResponseEntity<?> getByCity(@PathVariable(value = "city") String city, @RequestParam(value = "page",defaultValue = "0") Integer page,@RequestParam(value = "size",defaultValue = "20") Integer size){
         Sort sort = new Sort(Sort.Direction.DESC,"time");
@@ -33,6 +41,30 @@ public class WeatherController {
         map.put("result",weatherEntityPage);
         map.put("status","success");
         return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
+    /**
+     *
+     *  url   "/weather/time"  方法： GET
+     *  @param from_timestamp
+     *  @param to_timestamp
+     *
+     *
+     *  @return
+     * */
+
+    @RequestMapping(value = "/time", method = RequestMethod.GET)
+    public ResponseEntity<?> getByTime(@RequestParam(value = "from",defaultValue = "0") long from_timestamp, @RequestParam(value = "to", defaultValue = "0") long to_timestamp){
+        Timestamp fromTime = new Timestamp(from_timestamp);
+        Timestamp toTime = new Timestamp(to_timestamp);
+        List<WeatherEntity> weatherEntityList;
+        weatherEntityList = weatherRepository.findByTime(fromTime,toTime);
+
+        Map map = new HashMap();
+        map.put("result",weatherEntityList);
+        map.put("status","success");
+
+        return new ResponseEntity<>(map,HttpStatus.OK);
     }
 
 }
