@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by mythsand on 25/02/2017.
+ * Created by mythsand on 02/03/2017.
  */
 @Entity
 @Table(name = "air", schema = "winter", catalog = "")
 public class AirEntity {
-    private String id;
+    private int id;
     private Timestamp time;
     private Double aqi;
     private String rank;
@@ -20,16 +20,16 @@ public class AirEntity {
     private Double o3;
     private Double so2;
     private String mainPollutant;
-    private String airPoint;
-
+    private CityAirEntity CityByPoint;
+//    private CityAirEntity cityAirByAirPoint;
 
     @Id
-    @Column(name = "id", nullable = false, length = 255)
-    public String getId() {
+    @Column(name = "id", nullable = false)
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -140,7 +140,7 @@ public class AirEntity {
 
         AirEntity airEntity = (AirEntity) o;
 
-        if (id != null ? !id.equals(airEntity.id) : airEntity.id != null) return false;
+        if (id != airEntity.id) return false;
         if (time != null ? !time.equals(airEntity.time) : airEntity.time != null) return false;
         if (aqi != null ? !aqi.equals(airEntity.aqi) : airEntity.aqi != null) return false;
         if (rank != null ? !rank.equals(airEntity.rank) : airEntity.rank != null) return false;
@@ -158,7 +158,7 @@ public class AirEntity {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = id;
         result = 31 * result + (time != null ? time.hashCode() : 0);
         result = 31 * result + (aqi != null ? aqi.hashCode() : 0);
         result = 31 * result + (rank != null ? rank.hashCode() : 0);
@@ -172,13 +172,23 @@ public class AirEntity {
         return result;
     }
 
-    @Basic
-    @Column(name = "air_point", nullable = true, length = 255)
-    public String getAirPoint() {
-        return airPoint;
+    @ManyToOne
+    @JoinColumn(name = "air_point", referencedColumnName = "air_point", nullable = false)
+    public CityAirEntity getCityByPoint() {
+        return CityByPoint;
     }
 
-    public void setAirPoint(String airPoint) {
-        this.airPoint = airPoint;
+    public void setCityByPoint(CityAirEntity cityByPoint) {
+        CityByPoint = cityByPoint;
     }
+
+//    @ManyToOne
+//    @JoinColumn(name = "air_point", referencedColumnName = "air_point", nullable = false)
+//    public CityAirEntity getCityAirByAirPoint() {
+//        return cityAirByAirPoint;
+//    }
+//
+//    public void setCityAirByAirPoint(CityAirEntity cityAirByAirPoint) {
+//        this.cityAirByAirPoint = cityAirByAirPoint;
+//    }
 }

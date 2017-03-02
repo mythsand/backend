@@ -7,17 +7,16 @@ import java.util.Collection;
  * Created by mythsand on 02/03/2017.
  */
 @Entity
-@Table(name = "city", schema = "winter", catalog = "")
-public class CityEntity {
+@Table(name = "city_water", schema = "winter", catalog = "")
+public class CityWaterEntity {
     private String province;
     private String city;
     private String longitude;
     private String latitude;
+    private String waterPoint;
     private String pinyin;
-    private Collection<EconomyEntity> economiesByCity;
-    private Collection<WeatherEntity> weathersByCity;
-//    private Collection<EconomyEntity> EconomyByCity;
-//    private Collection<WeatherEntity> WeatherByCity;
+//    private Collection<WaterEntity> watersByWaterPoint;
+    private Collection<WaterEntity> WaterByPoint;
 
     @Basic
     @Column(name = "province", nullable = true, length = 255)
@@ -29,8 +28,8 @@ public class CityEntity {
         this.province = province;
     }
 
-    @Id
-    @Column(name = "city", nullable = false, length = 255)
+    @Basic
+    @Column(name = "city", nullable = true, length = 255)
     public String getCity() {
         return city;
     }
@@ -59,6 +58,16 @@ public class CityEntity {
         this.latitude = latitude;
     }
 
+    @Id
+    @Column(name = "water_point", nullable = false, length = 255)
+    public String getWaterPoint() {
+        return waterPoint;
+    }
+
+    public void setWaterPoint(String waterPoint) {
+        this.waterPoint = waterPoint;
+    }
+
     @Basic
     @Column(name = "pinyin", nullable = true, length = 255)
     public String getPinyin() {
@@ -74,12 +83,13 @@ public class CityEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CityEntity that = (CityEntity) o;
+        CityWaterEntity that = (CityWaterEntity) o;
 
         if (province != null ? !province.equals(that.province) : that.province != null) return false;
         if (city != null ? !city.equals(that.city) : that.city != null) return false;
         if (longitude != null ? !longitude.equals(that.longitude) : that.longitude != null) return false;
         if (latitude != null ? !latitude.equals(that.latitude) : that.latitude != null) return false;
+        if (waterPoint != null ? !waterPoint.equals(that.waterPoint) : that.waterPoint != null) return false;
         if (pinyin != null ? !pinyin.equals(that.pinyin) : that.pinyin != null) return false;
 
         return true;
@@ -91,43 +101,26 @@ public class CityEntity {
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (longitude != null ? longitude.hashCode() : 0);
         result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
+        result = 31 * result + (waterPoint != null ? waterPoint.hashCode() : 0);
         result = 31 * result + (pinyin != null ? pinyin.hashCode() : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "cityByCity")
-    public Collection<EconomyEntity> getEconomiesByCity() {
-        return economiesByCity;
-    }
-
-    public void setEconomiesByCity(Collection<EconomyEntity> economiesByCity) {
-        this.economiesByCity = economiesByCity;
-    }
-
-    @OneToMany(mappedBy = "cityByCity")
-    public Collection<WeatherEntity> getWeathersByCity() {
-        return weathersByCity;
-    }
-
-    public void setWeathersByCity(Collection<WeatherEntity> weathersByCity) {
-        this.weathersByCity = weathersByCity;
-    }
-
-//    @OneToMany(mappedBy = "CityByCity")
-//    public Collection<EconomyEntity> getEconomyByCity() {
-//        return EconomyByCity;
+//    @OneToMany(mappedBy = "cityWaterByWaterPoint")
+//    public Collection<WaterEntity> getWatersByWaterPoint() {
+//        return watersByWaterPoint;
 //    }
 //
-//    public void setEconomyByCity(Collection<EconomyEntity> economyByCity) {
-//        EconomyByCity = economyByCity;
+//    public void setWatersByWaterPoint(Collection<WaterEntity> watersByWaterPoint) {
+//        this.watersByWaterPoint = watersByWaterPoint;
 //    }
-//
-//    @OneToMany(mappedBy = "CityByCity")
-//    public Collection<WeatherEntity> getWeatherByCity() {
-//        return WeatherByCity;
-//    }
-//
-//    public void setWeatherByCity(Collection<WeatherEntity> weatherByCity) {
-//        WeatherByCity = weatherByCity;
-//    }
+
+    @OneToMany(mappedBy = "cityByPoint")
+    public Collection<WaterEntity> getWaterByPoint() {
+        return WaterByPoint;
+    }
+
+    public void setWaterByPoint(Collection<WaterEntity> waterByPoint) {
+        WaterByPoint = waterByPoint;
+    }
 }

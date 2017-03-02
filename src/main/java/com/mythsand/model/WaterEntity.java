@@ -3,20 +3,20 @@ package com.mythsand.model;
 import javax.persistence.*;
 
 /**
- * Created by mythsand on 25/02/2017.
+ * Created by mythsand on 02/03/2017.
  */
 @Entity
 @Table(name = "water", schema = "winter", catalog = "")
 public class WaterEntity {
     private int id;
-    private String point;
     private Double ph;
     private Double dO;
     private Double cod;
     private Double nh3N;
     private String toWeek;
     private String preWeek;
-    private String waterPoint;
+//    private CityWaterEntity cityWaterByWaterPoint;
+    private CityWaterEntity cityByPoint;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -26,16 +26,6 @@ public class WaterEntity {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Basic
-    @Column(name = "point", nullable = true, length = 255)
-    public String getPoint() {
-        return point;
-    }
-
-    public void setPoint(String point) {
-        this.point = point;
     }
 
     @Basic
@@ -106,7 +96,6 @@ public class WaterEntity {
         WaterEntity that = (WaterEntity) o;
 
         if (id != that.id) return false;
-        if (point != null ? !point.equals(that.point) : that.point != null) return false;
         if (ph != null ? !ph.equals(that.ph) : that.ph != null) return false;
         if (dO != null ? !dO.equals(that.dO) : that.dO != null) return false;
         if (cod != null ? !cod.equals(that.cod) : that.cod != null) return false;
@@ -120,7 +109,6 @@ public class WaterEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (point != null ? point.hashCode() : 0);
         result = 31 * result + (ph != null ? ph.hashCode() : 0);
         result = 31 * result + (dO != null ? dO.hashCode() : 0);
         result = 31 * result + (cod != null ? cod.hashCode() : 0);
@@ -130,13 +118,23 @@ public class WaterEntity {
         return result;
     }
 
-    @Basic
-    @Column(name = "water_point", nullable = true, length = 255)
-    public String getWaterPoint() {
-        return waterPoint;
+//    @ManyToOne
+//    @JoinColumn(name = "water_point", referencedColumnName = "water_point")
+//    public CityWaterEntity getCityWaterByWaterPoint() {
+//        return cityWaterByWaterPoint;
+//    }
+//
+//    public void setCityWaterByWaterPoint(CityWaterEntity cityWaterByWaterPoint) {
+//        this.cityWaterByWaterPoint = cityWaterByWaterPoint;
+//    }
+
+    @ManyToOne
+    @JoinColumn(name = "water_point", referencedColumnName = "water_point")
+    public CityWaterEntity getCityByPoint() {
+        return cityByPoint;
     }
 
-    public void setWaterPoint(String waterPoint) {
-        this.waterPoint = waterPoint;
+    public void setCityByPoint(CityWaterEntity cityByPoint) {
+        this.cityByPoint = cityByPoint;
     }
 }

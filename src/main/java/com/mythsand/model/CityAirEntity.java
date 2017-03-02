@@ -7,17 +7,16 @@ import java.util.Collection;
  * Created by mythsand on 02/03/2017.
  */
 @Entity
-@Table(name = "city", schema = "winter", catalog = "")
-public class CityEntity {
+@Table(name = "city_air", schema = "winter", catalog = "")
+public class CityAirEntity {
     private String province;
     private String city;
     private String longitude;
     private String latitude;
     private String pinyin;
-    private Collection<EconomyEntity> economiesByCity;
-    private Collection<WeatherEntity> weathersByCity;
-//    private Collection<EconomyEntity> EconomyByCity;
-//    private Collection<WeatherEntity> WeatherByCity;
+    private String airPoint;
+    private Collection<AirEntity> AirByPoint;
+//    private Collection<AirEntity> airsByAirPoint;
 
     @Basic
     @Column(name = "province", nullable = true, length = 255)
@@ -29,8 +28,8 @@ public class CityEntity {
         this.province = province;
     }
 
-    @Id
-    @Column(name = "city", nullable = false, length = 255)
+    @Basic
+    @Column(name = "city", nullable = true, length = 255)
     public String getCity() {
         return city;
     }
@@ -69,18 +68,29 @@ public class CityEntity {
         this.pinyin = pinyin;
     }
 
+    @Id
+    @Column(name = "air_point", nullable = false, length = 255)
+    public String getAirPoint() {
+        return airPoint;
+    }
+
+    public void setAirPoint(String airPoint) {
+        this.airPoint = airPoint;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CityEntity that = (CityEntity) o;
+        CityAirEntity that = (CityAirEntity) o;
 
         if (province != null ? !province.equals(that.province) : that.province != null) return false;
         if (city != null ? !city.equals(that.city) : that.city != null) return false;
         if (longitude != null ? !longitude.equals(that.longitude) : that.longitude != null) return false;
         if (latitude != null ? !latitude.equals(that.latitude) : that.latitude != null) return false;
         if (pinyin != null ? !pinyin.equals(that.pinyin) : that.pinyin != null) return false;
+        if (airPoint != null ? !airPoint.equals(that.airPoint) : that.airPoint != null) return false;
 
         return true;
     }
@@ -92,42 +102,25 @@ public class CityEntity {
         result = 31 * result + (longitude != null ? longitude.hashCode() : 0);
         result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
         result = 31 * result + (pinyin != null ? pinyin.hashCode() : 0);
+        result = 31 * result + (airPoint != null ? airPoint.hashCode() : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "cityByCity")
-    public Collection<EconomyEntity> getEconomiesByCity() {
-        return economiesByCity;
+    @OneToMany(mappedBy = "cityByPoint")
+    public Collection<AirEntity> getAirByPoint() {
+        return AirByPoint;
     }
 
-    public void setEconomiesByCity(Collection<EconomyEntity> economiesByCity) {
-        this.economiesByCity = economiesByCity;
+    public void setAirByPoint(Collection<AirEntity> airByPoint) {
+        AirByPoint = airByPoint;
     }
 
-    @OneToMany(mappedBy = "cityByCity")
-    public Collection<WeatherEntity> getWeathersByCity() {
-        return weathersByCity;
-    }
-
-    public void setWeathersByCity(Collection<WeatherEntity> weathersByCity) {
-        this.weathersByCity = weathersByCity;
-    }
-
-//    @OneToMany(mappedBy = "CityByCity")
-//    public Collection<EconomyEntity> getEconomyByCity() {
-//        return EconomyByCity;
+//    @OneToMany(mappedBy = "cityAirByAirPoint")
+//    public Collection<AirEntity> getAirsByAirPoint() {
+//        return airsByAirPoint;
 //    }
 //
-//    public void setEconomyByCity(Collection<EconomyEntity> economyByCity) {
-//        EconomyByCity = economyByCity;
-//    }
-//
-//    @OneToMany(mappedBy = "CityByCity")
-//    public Collection<WeatherEntity> getWeatherByCity() {
-//        return WeatherByCity;
-//    }
-//
-//    public void setWeatherByCity(Collection<WeatherEntity> weatherByCity) {
-//        WeatherByCity = weatherByCity;
+//    public void setAirsByAirPoint(Collection<AirEntity> airsByAirPoint) {
+//        this.airsByAirPoint = airsByAirPoint;
 //    }
 }

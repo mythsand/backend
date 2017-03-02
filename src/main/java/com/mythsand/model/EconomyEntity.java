@@ -4,40 +4,27 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by mythsand on 25/02/2017.
+ * Created by mythsand on 02/03/2017.
  */
 @Entity
 @Table(name = "economy", schema = "winter", catalog = "")
 public class EconomyEntity {
-    private String id;
-    private String location;
+    private int id;
     private Timestamp time;
     private String gdp;
     private String nationalIn;
     private String industryPr;
     private String tertiaryIn;
-    private String city;
+    private CityEntity cityByCity;
 
-
-    @Basic
     @Id
-    @Column(name = "id", nullable = false, length = 255)
-    public String getId() {
+    @Column(name = "id", nullable = false)
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    @Basic
-    @Column(name = "location", nullable = true, length = 255)
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     @Basic
@@ -97,8 +84,7 @@ public class EconomyEntity {
 
         EconomyEntity that = (EconomyEntity) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (location != null ? !location.equals(that.location) : that.location != null) return false;
+        if (id != that.id) return false;
         if (time != null ? !time.equals(that.time) : that.time != null) return false;
         if (gdp != null ? !gdp.equals(that.gdp) : that.gdp != null) return false;
         if (nationalIn != null ? !nationalIn.equals(that.nationalIn) : that.nationalIn != null) return false;
@@ -110,8 +96,7 @@ public class EconomyEntity {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (location != null ? location.hashCode() : 0);
+        int result = id;
         result = 31 * result + (time != null ? time.hashCode() : 0);
         result = 31 * result + (gdp != null ? gdp.hashCode() : 0);
         result = 31 * result + (nationalIn != null ? nationalIn.hashCode() : 0);
@@ -120,13 +105,13 @@ public class EconomyEntity {
         return result;
     }
 
-    @Basic
-    @Column(name = "city", nullable = true, length = 255)
-    public String getCity() {
-        return city;
+    @ManyToOne
+    @JoinColumn(name = "city", referencedColumnName = "city")
+    public CityEntity getCityByCity() {
+        return cityByCity;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityByCity(CityEntity cityByCity) {
+        this.cityByCity = cityByCity;
     }
 }

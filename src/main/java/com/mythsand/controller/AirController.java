@@ -1,9 +1,12 @@
 package com.mythsand.controller;
 
 import com.mythsand.model.AirEntity;
-import com.mythsand.model.CityEntity;
 import com.mythsand.repository.AirRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,11 +26,13 @@ public class AirController {
     @Autowired
     AirRepository airRepository;
 
-    @RequestMapping("/location/{location}")
-    public ResponseEntity<?> getByLocation(@PathVariable("location") String location){
-        System.out.println("location:"+location);
-        List<AirEntity> airEntityList;
-        airEntityList = airRepository.findAll();
+    @RequestMapping("/airpoint/{airpoint}/{page}/{size}")
+    public ResponseEntity<?> getByLocation(@PathVariable("airpoint") String airPoint, @PathVariable(value = "page") Integer page,@PathVariable("size") Integer size){
+        System.out.println("AIR_POINT:"+airPoint);
+        Sort sort = new Sort(Sort.Direction.DESC,"time");
+        Pageable pageable = new PageRequest(page,size,sort);
+        Page<AirEntity> airEntityList;
+        airEntityList =  airRepository.findByAirPoint(airPoint,pageable);
         Map map = new HashMap();
         map.put("result",airEntityList);
         map.put("status","success");

@@ -4,13 +4,12 @@ import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Created by mythsand on 25/02/2017.
+ * Created by mythsand on 02/03/2017.
  */
 @Entity
 @Table(name = "weather", schema = "winter", catalog = "")
 public class WeatherEntity {
-    private String id;
-    private String location;
+    private int id;
     private Date time;
     private String weather;
     private Double temperature;
@@ -21,27 +20,16 @@ public class WeatherEntity {
     private String cloudRate;
     private Double windSpeed;
     private Double windDir;
-    private String city;
+    private CityEntity cityByCity;
 
-    @Basic
     @Id
-    @Column(name = "id", nullable = false, length = 255)
-    public String getId() {
+    @Column(name = "id", nullable = false)
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    @Basic
-    @Column(name = "location", nullable = true, length = 255)
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     @Basic
@@ -151,8 +139,7 @@ public class WeatherEntity {
 
         WeatherEntity that = (WeatherEntity) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (location != null ? !location.equals(that.location) : that.location != null) return false;
+        if (id != that.id) return false;
         if (time != null ? !time.equals(that.time) : that.time != null) return false;
         if (weather != null ? !weather.equals(that.weather) : that.weather != null) return false;
         if (temperature != null ? !temperature.equals(that.temperature) : that.temperature != null) return false;
@@ -170,8 +157,7 @@ public class WeatherEntity {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (location != null ? location.hashCode() : 0);
+        int result = id;
         result = 31 * result + (time != null ? time.hashCode() : 0);
         result = 31 * result + (weather != null ? weather.hashCode() : 0);
         result = 31 * result + (temperature != null ? temperature.hashCode() : 0);
@@ -185,13 +171,13 @@ public class WeatherEntity {
         return result;
     }
 
-    @Basic
-    @Column(name = "city", nullable = true, length = 255)
-    public String getCity() {
-        return city;
+    @ManyToOne
+    @JoinColumn(name = "city", referencedColumnName = "city")
+    public CityEntity getCityByCity() {
+        return cityByCity;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityByCity(CityEntity cityByCity) {
+        this.cityByCity = cityByCity;
     }
 }
