@@ -30,7 +30,7 @@ public class WeatherController {
      *   @param page
      *   @param size
      *
-     *   @return
+     *  @return
      * */
     @RequestMapping(value = "/city/{city}",method = RequestMethod.GET)
     public ResponseEntity<?> getByCity(@PathVariable(value = "city") String city, @RequestParam(value = "page",defaultValue = "0") Integer page,@RequestParam(value = "size",defaultValue = "20") Integer size){
@@ -48,7 +48,6 @@ public class WeatherController {
      *  url   "/weather/time"  方法： GET
      *  @param from_timestamp
      *  @param to_timestamp
-     *
      *
      *  @return
      * */
