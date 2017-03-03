@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,4 +36,19 @@ public class WaterController {
         map.put("status","success");
         return new ResponseEntity<Object>(map, HttpStatus.OK);
     }
+
+//    @RequestMapping(value = "/time", method = RequestMethod.GET)
+//    public ResponseEntity<?> getByTime(@RequestParam(value = "from",defaultValue = "0") long from_timestamp, @RequestParam(value = "to",defaultValue = "0") long to_timestamp){
+//        Timestamp fromTime = new Timestamp(from_timestamp);
+//        Timestamp toTime = new Timestamp(to_timestamp);
+//
+//        List<WaterEntity> waterEntityList;
+//        waterEntityList = waterRepository.findByTime(fromTime,toTime);
+//
+//        Map map = new HashMap();
+//        map.put("result",waterEntityList);
+//        map.put("status","success");
+//
+//        return new ResponseEntity<>(map,HttpStatus.OK);
+//    }
 }
