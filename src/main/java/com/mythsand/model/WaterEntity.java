@@ -10,13 +10,15 @@ import javax.persistence.*;
 public class WaterEntity {
     private int id;
     private Double ph;
-    private Double dO;
+    private Double dO;    //大写的O
     private Double cod;
     private Double nh3N;
     private String toWeek;
     private String preWeek;
 //    private CityWaterEntity cityWaterByWaterPoint;
     private CityWaterEntity cityByPoint;
+//    private Integer year;
+//    private Integer week;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -88,6 +90,16 @@ public class WaterEntity {
         this.preWeek = preWeek;
     }
 
+//    @ManyToOne
+//    @JoinColumn(name = "water_point", referencedColumnName = "water_point")
+//    public CityWaterEntity getCityWaterByWaterPoint() {
+//        return cityWaterByWaterPoint;
+//    }
+//
+//    public void setCityWaterByWaterPoint(CityWaterEntity cityWaterByWaterPoint) {
+//        this.cityWaterByWaterPoint = cityWaterByWaterPoint;
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -118,16 +130,6 @@ public class WaterEntity {
         return result;
     }
 
-//    @ManyToOne
-//    @JoinColumn(name = "water_point", referencedColumnName = "water_point")
-//    public CityWaterEntity getCityWaterByWaterPoint() {
-//        return cityWaterByWaterPoint;
-//    }
-//
-//    public void setCityWaterByWaterPoint(CityWaterEntity cityWaterByWaterPoint) {
-//        this.cityWaterByWaterPoint = cityWaterByWaterPoint;
-//    }
-
     @ManyToOne
     @JoinColumn(name = "water_point", referencedColumnName = "water_point")
     public CityWaterEntity getCityByPoint() {
@@ -137,4 +139,24 @@ public class WaterEntity {
     public void setCityByPoint(CityWaterEntity cityByPoint) {
         this.cityByPoint = cityByPoint;
     }
+//
+//    @Basic
+//    @Column(name = "year", nullable = true)
+//    public Integer getYear() {
+//        return year;
+//    }
+//
+//    public void setYear(Integer year) {
+//        this.year = year;
+//    }
+//
+//    @Basic
+//    @Column(name = "week", nullable = true)
+//    public Integer getWeek() {
+//        return week;
+//    }
+//
+//    public void setWeek(Integer week) {
+//        this.week = week;
+//    }
 }
