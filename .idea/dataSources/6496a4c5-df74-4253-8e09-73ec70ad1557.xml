@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="defaultPersistenceUnit/Hibernate">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="winter">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="sys"/>
+    <table id="7" parent="2" name="air"/>
+    <table id="8" parent="2" name="city"/>
+    <table id="9" parent="2" name="city_air"/>
+    <table id="10" parent="2" name="city_water"/>
+    <table id="11" parent="2" name="economy"/>
+    <table id="12" parent="2" name="water"/>
+    <table id="13" parent="2" name="weather"/>
+    <column id="14" parent="7" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="15" parent="7" name="time">
+      <Position>2</Position>
+      <DataType>timestamp|0</DataType>
+    </column>
+    <column id="16" parent="7" name="aqi">
+      <Position>3</Position>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="17" parent="7" name="rank">
+      <Position>4</Position>
+      <Comment>空气质量指数类别</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="18" parent="7" name="pm25">
+      <Position>5</Position>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="19" parent="7" name="pm10">
+      <Position>6</Position>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="20" parent="7" name="co">
+      <Position>7</Position>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="21" parent="7" name="no2">
+      <Position>8</Position>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="22" parent="7" name="o3">
+      <Position>9</Position>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="23" parent="7" name="so2">
+      <Position>10</Position>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="24" parent="7" name="main_pollutant">
+      <Position>11</Position>
+      <Comment>主要污染物</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="25" parent="7" name="air_point">
+      <Position>12</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="26" parent="7" name="airp_fk_idx">
+      <ColNames>air_point</ColNames>
+    </index>
+    <key id="27" parent="7" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="28" parent="7" name="FKeus5glrffs3dpsw522klqio6n">
+      <ColNames>air_point</ColNames>
+      <RefSchemaName>winter</RefSchemaName>
+      <RefTableName>city_air</RefTableName>
+      <RefColNames>air_point</RefColNames>
+    </foreign-key>
+    <foreign-key id="29" parent="7" name="air_fk">
+      <ColNames>air_point</ColNames>
+      <RefSchemaName>winter</RefSchemaName>
+      <RefTableName>city_air</RefTableName>
+      <RefColNames>air_point</RefColNames>
+      <OnUpdate>no-action</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <column id="30" parent="8" name="province">
+      <Position>1</Position>
+      <Comment>省份</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="31" parent="8" name="city">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="8" name="longitude">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="33" parent="8" name="latitude">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="34" parent="8" name="pinyin">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="35" parent="8" name="city">
+      <ColNames>city</ColNames>
+    </index>
+    <key id="36" parent="8" name="PRIMARY">
+      <ColNames>city</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="37" parent="9" name="province">
+      <Position>1</Position>
+      <Comment>省份</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="38" parent="9" name="city">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="39" parent="9" name="longitude">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="40" parent="9" name="latitude">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="41" parent="9" name="pinyin">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="42" parent="9" name="air_point">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="43" parent="9" name="air_point">
+      <ColNames>air_point</ColNames>
+    </index>
+    <key id="44" parent="9" name="PRIMARY">
+      <ColNames>air_point</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="45" parent="10" name="province">
+      <Position>1</Position>
+      <Comment>省份</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="46" parent="10" name="city">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="47" parent="10" name="longitude">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="48" parent="10" name="latitude">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="49" parent="10" name="water_point">
+      <Position>5</Position>
+      <Comment>监测点</Comment>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="10" name="pinyin">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="51" parent="10" name="water_point">
+      <ColNames>water_point</ColNames>
+    </index>
+    <key id="52" parent="10" name="PRIMARY">
+      <ColNames>water_point</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="53" parent="11" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="54" parent="11" name="city">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="55" parent="11" name="time">
+      <Position>3</Position>
+      <DataType>timestamp|0</DataType>
+    </column>
+    <column id="56" parent="11" name="gdp">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="57" parent="11" name="NationalIn">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="58" parent="11" name="IndustryPr">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="59" parent="11" name="TertiaryIn">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="60" parent="11" name="city">
+      <ColNames>city</ColNames>
+    </index>
+    <index id="61" parent="11" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="62" parent="11" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="63" parent="11" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
+    </key>
+    <foreign-key id="64" parent="11" name="FKpvk4dri410d6vbprytkqen8ff">
+      <ColNames>city</ColNames>
+      <RefSchemaName>winter</RefSchemaName>
+      <RefTableName>city</RefTableName>
+      <RefColNames>city</RefColNames>
+    </foreign-key>
+    <foreign-key id="65" parent="11" name="eco_fk">
+      <ColNames>city</ColNames>
+      <RefSchemaName>winter</RefSchemaName>
+      <RefTableName>city</RefTableName>
+      <RefColNames>city</RefColNames>
+      <OnUpdate>no-action</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <column id="66" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="67" parent="12" name="water_point">
+      <Position>2</Position>
+      <Comment>监测点</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="68" parent="12" name="ph">
+      <Position>3</Position>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="69" parent="12" name="d_o">
+      <Position>4</Position>
+      <DataType>float|0</DataType>
+    </column>
+    <column id="70" parent="12" name="cod">
+      <Position>5</Position>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="71" parent="12" name="nh3_n">
+      <Position>6</Position>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="72" parent="12" name="to_week">
+      <Position>7</Position>
+      <Comment>本周水质</Comment>
+      <DataType>char(4)|0</DataType>
+    </column>
+    <column id="73" parent="12" name="pre_week">
+      <Position>8</Position>
+      <Comment>上周水质</Comment>
+      <DataType>char(4)|0</DataType>
+    </column>
+    <index id="74" parent="12" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="75" parent="12" name="waterp_fk_idx">
+      <ColNames>water_point</ColNames>
+    </index>
+    <key id="76" parent="12" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="77" parent="12" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
+    </key>
+    <foreign-key id="78" parent="12" name="FKmfqkf1hb9q6shj9v1805i361o">
+      <ColNames>water_point</ColNames>
+      <RefSchemaName>winter</RefSchemaName>
+      <RefTableName>city_water</RefTableName>
+      <RefColNames>water_point</RefColNames>
+    </foreign-key>
+    <foreign-key id="79" parent="12" name="water_fk">
+      <ColNames>water_point</ColNames>
+      <RefSchemaName>winter</RefSchemaName>
+      <RefTableName>city_water</RefTableName>
+      <RefColNames>water_point</RefColNames>
+      <OnUpdate>no-action</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <column id="80" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="81" parent="13" name="city">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="82" parent="13" name="time">
+      <Position>3</Position>
+      <DataType>timestamp|0</DataType>
+    </column>
+    <column id="83" parent="13" name="weather">
+      <Position>4</Position>
+      <Comment>天气概况</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="84" parent="13" name="temperature">
+      <Position>5</Position>
+      <Comment>温度</Comment>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="85" parent="13" name="humidity">
+      <Position>6</Position>
+      <Comment>湿度</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="86" parent="13" name="visibility">
+      <Position>7</Position>
+      <Comment>能见度</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="87" parent="13" name="wind_scale">
+      <Position>8</Position>
+      <Comment>风力（等级）</Comment>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="88" parent="13" name="wind_dir_degree">
+      <Position>9</Position>
+      <Comment>风向角度</Comment>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="89" parent="13" name="cloud_rate">
+      <Position>10</Position>
+      <Comment>云量</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="90" parent="13" name="wind_speed">
+      <Position>11</Position>
+      <Comment>风速</Comment>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <column id="91" parent="13" name="wind_dir">
+      <Position>12</Position>
+      <Comment>风向。单位是度。正北方向为0度，顺时针增加到360度。</Comment>
+      <DataType>float(18)|0</DataType>
+    </column>
+    <index id="92" parent="13" name="city">
+      <ColNames>city</ColNames>
+    </index>
+    <index id="93" parent="13" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="94" parent="13" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="95" parent="13" name="id_UNIQUE">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
+    </key>
+    <foreign-key id="96" parent="13" name="FK60rsvxw9rqv6afskx66p8xqxm">
+      <ColNames>city</ColNames>
+      <RefSchemaName>winter</RefSchemaName>
+      <RefTableName>city</RefTableName>
+      <RefColNames>city</RefColNames>
+    </foreign-key>
+    <foreign-key id="97" parent="13" name="wea_fk">
+      <ColNames>city</ColNames>
+      <RefSchemaName>winter</RefSchemaName>
+      <RefTableName>city</RefTableName>
+      <RefColNames>city</RefColNames>
+      <OnUpdate>no-action</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+  </database-model>
+</dataSource>

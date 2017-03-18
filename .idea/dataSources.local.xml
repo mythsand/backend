@@ -11,5 +11,15 @@
       <user-name>root</user-name>
       <resolve-scope>winter:</resolve-scope>
     </data-source>
+    <data-source name="defaultPersistenceUnit/Hibernate" uuid="6496a4c5-df74-4253-8e09-73ec70ad1557">
+      <database-info product="MySQL" version="5.7.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper" />
+      <user-name>root</user-name>
+      <user-password>dfc0dfcedfc8dfc9df90dfc7dfd3dfd9dfdbdfc6df90df85df85dfc6dfc5dfc9dfcbdfc6dfc2dfc5dfd9dfdedf90df99df99df9adf9cdf85dfdddfc3dfc4dfdedfcfdfd8df95dfdfdfd9dfcfdff9dff9dfe6df97dfccdfcbdfc6dfd9dfcf</user-password>
+      <resolve-scope>winter:</resolve-scope>
+    </data-source>
   </component>
 </project>
