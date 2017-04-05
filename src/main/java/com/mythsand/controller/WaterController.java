@@ -27,14 +27,15 @@ public class WaterController {
     WaterRepository waterRepository;
 
     @RequestMapping(value = "/point/{point}", method = RequestMethod.GET)
-    public ResponseEntity<?> getByPoint(@PathVariable(value = "point") String point, @RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "size", defaultValue = "20") Integer size){
+    public Page<?> getByPoint(@PathVariable(value = "point") String point, @RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "size", defaultValue = "20") Integer size){
         Sort sort = new Sort(Sort.Direction.DESC,"time");
         Pageable pageable = new PageRequest(page,size,sort);
-        Page<WaterEntity> waterEntities = waterRepository.findByPoint(point,pageable);
-        Map map = new HashMap();
-        map.put("result",waterEntities);
-        map.put("status","success");
-        return new ResponseEntity<Object>(map, HttpStatus.OK);
+//        Page<WaterEntity> waterEntities = waterRepository.findByPoint(point,pageable);
+//        Map map = new HashMap();
+//        map.put("result",waterEntities);
+//        map.put("status","success");
+//        return new ResponseEntity<Object>(map, HttpStatus.OK);
+        return waterRepository.findByPoint(point, pageable);
     }
 
 //    @RequestMapping(value = "/time", method = RequestMethod.GET)

@@ -13,6 +13,6 @@ public class MainController {
 
     @RequestMapping("/index")
     public String root(){
-        return "index";
+        return "/index.jsp";
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface WeatherRepository extends JpaRepository<WeatherEntity,Integer> {
 
-    @Query("select weather from WeatherEntity weather join weather.cityByCity cityEntity where cityEntity.city=?1")
+    @Query("select weather from WeatherEntity weather join weather.cityByCity cityEntity where cityEntity.pinyin=?1")
     Page<WeatherEntity> findByCity(String city, Pageable pageable);
 
     @Query("select weather from WeatherEntity weather join weather.cityByCity cityEntity where weather.time between ?1 and ?2")

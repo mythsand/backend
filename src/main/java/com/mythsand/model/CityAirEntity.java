@@ -1,5 +1,7 @@
 package com.mythsand.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -106,6 +108,7 @@ public class CityAirEntity {
         return result;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cityByPoint")
     public Collection<AirEntity> getAirByPoint() {
         return AirByPoint;

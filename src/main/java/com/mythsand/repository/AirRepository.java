@@ -22,4 +22,8 @@ public interface AirRepository extends JpaRepository<AirEntity,Integer> {
     @Query("select air from AirEntity air join air.cityByPoint cityAirEntity where air.time between ?1 and ?2")
     List<AirEntity> findByTime(Timestamp from,Timestamp to);
 
+//    @Query("select air from AirEntity air join CityAirEntity where CityAirEntity .pinyin=?1")
+//    List<AirEntity> findByCity(String city);
+    @Query("select air from AirEntity air join air.cityByPoint cityEntity where cityEntity.pinyin=?1")
+    Page<AirEntity> findByCity(String city, Pageable pageable);
 }

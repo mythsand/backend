@@ -25,16 +25,16 @@ public class EconomyController {
     EconomyRepository economyRepository;
 
     @RequestMapping(value = "/city/{city}", method = RequestMethod.GET)
-    public ResponseEntity<?> getByCity(@PathVariable(value = "city") String city,@RequestParam(value = "page",defaultValue = "0") Integer page,@RequestParam(value = "size",defaultValue = "20") Integer size){
+    public Page<?> getByCity(@PathVariable(value = "city") String city,@RequestParam(value = "page",defaultValue = "0") Integer page,@RequestParam(value = "size",defaultValue = "20") Integer size){
         Sort sort = new Sort(Sort.Direction.DESC,"time");
         Pageable pageable = new PageRequest(page,size,sort);
 
-        Page<EconomyEntity> economyEntities = economyRepository.findByCity(city,pageable);
-        Map map = new HashMap();
-        map.put("result",economyEntities);
-        map.put("status","success");
-
-        return new ResponseEntity<Object>(map, HttpStatus.OK);
+//        Page<EconomyEntity> economyEntities = economyRepository.findByCity(city,pageable);
+//        Map map = new HashMap();
+//        map.put("result",economyEntities);
+//        map.put("status","success");
+//        return new ResponseEntity<Object>(map, HttpStatus.OK);
+        return economyRepository.findByCity(city,pageable);
     }
 
 }

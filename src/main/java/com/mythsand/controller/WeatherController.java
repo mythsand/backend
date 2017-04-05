@@ -33,14 +33,15 @@ public class WeatherController {
      *  @return
      * */
     @RequestMapping(value = "/city/{city}",method = RequestMethod.GET)
-    public ResponseEntity<?> getByCity(@PathVariable(value = "city") String city, @RequestParam(value = "page",defaultValue = "0") Integer page,@RequestParam(value = "size",defaultValue = "20") Integer size){
+    public Page<?> getByCity(@PathVariable(value = "city") String city, @RequestParam(value = "page",defaultValue = "0") Integer page,@RequestParam(value = "size",defaultValue = "20") Integer size){
         Sort sort = new Sort(Sort.Direction.DESC,"time");
         Pageable pageable = new PageRequest(page,size,sort);
-        Page<WeatherEntity> weatherEntityPage = weatherRepository.findByCity(city,pageable);
-        Map map = new HashMap();
-        map.put("result",weatherEntityPage);
-        map.put("status","success");
-        return new ResponseEntity<>(map, HttpStatus.OK);
+//        Page<WeatherEntity> weatherEntityPage = weatherRepository.findByCity(city,pageable);
+//        Map map = new HashMap();
+//        map.put("result",weatherEntityPage);
+//        map.put("status","success");
+//        return new ResponseEntity<>(map, HttpStatus.OK);
+        return weatherRepository.findByCity(city, pageable);
     }
 
     /**
@@ -53,17 +54,16 @@ public class WeatherController {
      * */
 
     @RequestMapping(value = "/time", method = RequestMethod.GET)
-    public ResponseEntity<?> getByTime(@RequestParam(value = "from",defaultValue = "0") long from_timestamp, @RequestParam(value = "to", defaultValue = "0") long to_timestamp){
+    public List<?> getByTime(@RequestParam(value = "from",defaultValue = "0") long from_timestamp, @RequestParam(value = "to", defaultValue = "0") long to_timestamp){
         Timestamp fromTime = new Timestamp(from_timestamp);
         Timestamp toTime = new Timestamp(to_timestamp);
-        List<WeatherEntity> weatherEntityList;
-        weatherEntityList = weatherRepository.findByTime(fromTime,toTime);
-
-        Map map = new HashMap();
-        map.put("result",weatherEntityList);
-        map.put("status","success");
-
-        return new ResponseEntity<>(map,HttpStatus.OK);
+//        List<WeatherEntity> weatherEntityList;
+//        weatherEntityList = weatherRepository.findByTime(fromTime,toTime);
+//        Map map = new HashMap();
+//        map.put("result",weatherEntityList);
+//        map.put("status","success");
+//        return new ResponseEntity<>(map,HttpStatus.OK);
+        return weatherRepository.findByTime(fromTime, toTime);
     }
 
 }
