@@ -1,23 +1,45 @@
 package com.mythsand.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlInlineBinaryData;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * Created by mythsand on 02/03/2017.
  */
 @Entity
-@Table(name = "city", schema = "winter", catalog = "")
-public class CityEntity {
+@Table(name = "city", schema = "winter")
+public class CityEntity implements Serializable {
     private String province;
     private String city;
     private String longitude;
     private String latitude;
     private String pinyin;
-    private Collection<EconomyEntity> economiesByCity;
-    private Collection<WeatherEntity> weathersByCity;
+//    private Collection<EconomyEntity> economiesByCity;
+//    private Collection<WeatherEntity> weathersByCity;
 //    private Collection<EconomyEntity> EconomyByCity;
 //    private Collection<WeatherEntity> WeatherByCity;
+//    @OneToMany(mappedBy = "CityByCity")
+//    public Collection<EconomyEntity> getEconomyByCity() {
+//        return EconomyByCity;
+//    }
+//
+//    public void setEconomyByCity(Collection<EconomyEntity> economyByCity) {
+//        EconomyByCity = economyByCity;
+//    }
+//
+//    @OneToMany(mappedBy = "CityByCity")
+//    public Collection<WeatherEntity> getWeatherByCity() {
+//        return WeatherByCity;
+//    }
+//
+//    public void setWeatherByCity(Collection<WeatherEntity> weatherByCity) {
+//        WeatherByCity = weatherByCity;
+//    }
+//    private WeatherEntity CityByWea;
 
     @Basic
     @Column(name = "province", nullable = true, length = 255)
@@ -29,7 +51,7 @@ public class CityEntity {
         this.province = province;
     }
 
-    @Id
+    @Basic
     @Column(name = "city", nullable = false, length = 255)
     public String getCity() {
         return city;
@@ -59,8 +81,8 @@ public class CityEntity {
         this.latitude = latitude;
     }
 
-    @Basic
-    @Column(name = "pinyin", nullable = true, length = 255)
+    @Id
+    @Column(name = "pinyin", nullable = false, length = 255)
     public String getPinyin() {
         return pinyin;
     }
@@ -95,39 +117,32 @@ public class CityEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "cityByCity")
-    public Collection<EconomyEntity> getEconomiesByCity() {
-        return economiesByCity;
-    }
-
-    public void setEconomiesByCity(Collection<EconomyEntity> economiesByCity) {
-        this.economiesByCity = economiesByCity;
-    }
-
-    @OneToMany(mappedBy = "cityByCity")
-    public Collection<WeatherEntity> getWeathersByCity() {
-        return weathersByCity;
-    }
-
-    public void setWeathersByCity(Collection<WeatherEntity> weathersByCity) {
-        this.weathersByCity = weathersByCity;
-    }
-
-//    @OneToMany(mappedBy = "CityByCity")
-//    public Collection<EconomyEntity> getEconomyByCity() {
-//        return EconomyByCity;
+//    @OneToMany(mappedBy = "cityByCity")
+//    public Collection<EconomyEntity> getEconomiesByCity() {
+//        return economiesByCity;
 //    }
 //
-//    public void setEconomyByCity(Collection<EconomyEntity> economyByCity) {
-//        EconomyByCity = economyByCity;
+//    public void setEconomiesByCity(Collection<EconomyEntity> economiesByCity) {
+//        this.economiesByCity = economiesByCity;
 //    }
 //
-//    @OneToMany(mappedBy = "CityByCity")
-//    public Collection<WeatherEntity> getWeatherByCity() {
-//        return WeatherByCity;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "cityByCity")
+//    public Collection<WeatherEntity> getWeathersByCity() {
+//        return weathersByCity;
 //    }
 //
-//    public void setWeatherByCity(Collection<WeatherEntity> weatherByCity) {
-//        WeatherByCity = weatherByCity;
+//    public void setWeathersByCity(Collection<WeatherEntity> weathersByCity) {
+//        this.weathersByCity = weathersByCity;
+//    }
+
+//    @ManyToOne
+//    @JoinColumn(name = "pinyin", referencedColumnName = "city")
+//    public WeatherEntity getCityByWea() {
+//        return CityByWea;
+//    }
+//
+//    public void setCityByWea(WeatherEntity cityByWea) {
+//        CityByWea = cityByWea;
 //    }
 }

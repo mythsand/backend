@@ -3,6 +3,7 @@ package com.mythsand.model;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 /**
  * Created by mythsand on 02/03/2017.
@@ -10,18 +11,50 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "weather", schema = "winter", catalog = "")
 public class WeatherEntity {
+
+    private CityEntity cityByCity;
     private int id;
     private Timestamp time;
     private String weather;
     private Double temperature;
     private String humidity;
-    private String visibility;
-    private Double windScale;
+    private Double visibility;
+    private String windScale;
     private Double windDirDegree;
-    private String cloudRate;
     private Double windSpeed;
-    private Double windDir;
-    private CityEntity cityByCity;
+    private String windDir;
+    private Double precipitation;
+//    private Collection<CityEntity> WeaByCity;
+
+    @Basic
+    @Column(name = "visibility", nullable = true, precision = 0)
+    public Double getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(Double visibility) {
+        this.visibility = visibility;
+    }
+
+    @Basic
+    @Column(name = "wind_scale", nullable = true, length = 18)
+    public String getWindScale() {
+        return windScale;
+    }
+
+    public void setWindScale(String windScale) {
+        this.windScale = windScale;
+    }
+
+    @Basic
+    @Column(name = "wind_dir", nullable = true, length = 18)
+    public String getWindDir() {
+        return windDir;
+    }
+
+    public void setWindDir(String windDir) {
+        this.windDir = windDir;
+    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -44,7 +77,7 @@ public class WeatherEntity {
     }
 
     @Basic
-    @Column(name = "weather", nullable = true, length = 255)
+    @Column(name = "weather", nullable = true, length = 18)
     public String getWeather() {
         return weather;
     }
@@ -64,33 +97,13 @@ public class WeatherEntity {
     }
 
     @Basic
-    @Column(name = "humidity", nullable = true, length = 255)
+    @Column(name = "humidity", nullable = true, length = 18)
     public String getHumidity() {
         return humidity;
     }
 
     public void setHumidity(String humidity) {
         this.humidity = humidity;
-    }
-
-    @Basic
-    @Column(name = "visibility", nullable = true, length = 255)
-    public String getVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(String visibility) {
-        this.visibility = visibility;
-    }
-
-    @Basic
-    @Column(name = "wind_scale", nullable = true, precision = 0)
-    public Double getWindScale() {
-        return windScale;
-    }
-
-    public void setWindScale(Double windScale) {
-        this.windScale = windScale;
     }
 
     @Basic
@@ -104,16 +117,6 @@ public class WeatherEntity {
     }
 
     @Basic
-    @Column(name = "cloud_rate", nullable = true, length = 255)
-    public String getCloudRate() {
-        return cloudRate;
-    }
-
-    public void setCloudRate(String cloudRate) {
-        this.cloudRate = cloudRate;
-    }
-
-    @Basic
     @Column(name = "wind_speed", nullable = true, precision = 0)
     public Double getWindSpeed() {
         return windSpeed;
@@ -121,16 +124,6 @@ public class WeatherEntity {
 
     public void setWindSpeed(Double windSpeed) {
         this.windSpeed = windSpeed;
-    }
-
-    @Basic
-    @Column(name = "wind_dir", nullable = true, precision = 0)
-    public Double getWindDir() {
-        return windDir;
-    }
-
-    public void setWindDir(Double windDir) {
-        this.windDir = windDir;
     }
 
     @Override
@@ -149,7 +142,6 @@ public class WeatherEntity {
         if (windScale != null ? !windScale.equals(that.windScale) : that.windScale != null) return false;
         if (windDirDegree != null ? !windDirDegree.equals(that.windDirDegree) : that.windDirDegree != null)
             return false;
-        if (cloudRate != null ? !cloudRate.equals(that.cloudRate) : that.cloudRate != null) return false;
         if (windSpeed != null ? !windSpeed.equals(that.windSpeed) : that.windSpeed != null) return false;
         if (windDir != null ? !windDir.equals(that.windDir) : that.windDir != null) return false;
 
@@ -166,14 +158,13 @@ public class WeatherEntity {
         result = 31 * result + (visibility != null ? visibility.hashCode() : 0);
         result = 31 * result + (windScale != null ? windScale.hashCode() : 0);
         result = 31 * result + (windDirDegree != null ? windDirDegree.hashCode() : 0);
-        result = 31 * result + (cloudRate != null ? cloudRate.hashCode() : 0);
         result = 31 * result + (windSpeed != null ? windSpeed.hashCode() : 0);
         result = 31 * result + (windDir != null ? windDir.hashCode() : 0);
         return result;
     }
 
     @ManyToOne
-    @JoinColumn(name = "city", referencedColumnName = "city")
+    @JoinColumn(name = "city", referencedColumnName = "pinyin")
     public CityEntity getCityByCity() {
         return cityByCity;
     }
@@ -181,4 +172,23 @@ public class WeatherEntity {
     public void setCityByCity(CityEntity cityByCity) {
         this.cityByCity = cityByCity;
     }
+
+    @Basic
+    @Column(name = "precipitation", nullable = true, precision = 0)
+    public Double getPrecipitation() {
+        return precipitation;
+    }
+
+    public void setPrecipitation(Double precipitation) {
+        this.precipitation = precipitation;
+    }
+//
+//    @OneToMany(mappedBy = "CityByWea")
+//    public Collection<CityEntity> getWeaByCity() {
+//        return WeaByCity;
+//    }
+//
+//    public void setWeaByCity(Collection<CityEntity> weaByCity) {
+//        WeaByCity = weaByCity;
+//    }
 }
